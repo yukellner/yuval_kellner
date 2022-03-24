@@ -12,14 +12,36 @@
 <body onload="init()">
     <div>
         <div onclick="init()" class="smile">😃</div>
-        <button class="hintcount" onclick="hint()">hint🔦</button>
-        <div class="lives"></div>
-        <div class="minescount"></div>
-        <div class="stoper"></div>
+        <button class="hintcount head" onclick="hint()">hint🔦</button>
+        <div class="lives head"></div>
+        <div class="minescount head"></div>
+        <div class="stoper head"></div>
     </div>
-    <button onclick="levelchoose(this)" class="pressed">Beginner</button>
-    <button onclick="levelchoose(this)" class="notpressed">Medium</button>
-    <button onclick="levelchoose(this)" class="notpressed">Expert</button>
+    <div>
+    <label class="container">Easy
+        <input class="Easy" type="radio" checked="checked" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Medium
+        <input class="Medium" type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">Expert
+        <input class="Expert" type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+
+      <div>
+          <h2></h2>
+      </div>
+
+    </div>
+
+    <!-- <label><input class="Easy" type="checkbox" checked="checked">Easy</label>
+    <label><input class="Medium" type="checkbox">Medium</label>
+    <label><input class="Expert" type="checkbox">Expert</label> -->
+    <!-- <button onclick="levelchoose(this)" class="btn">Medium</button>
+    <button onclick="levelchoose(this)" class="btn">Expert</button> -->
     <table class="table">
 
     </table>

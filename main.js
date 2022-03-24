@@ -9,11 +9,13 @@ var mizetotal = 2
 var markedMinses = 0
 var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, lives: 3, isHint: false, avilbleHints: 3 }
 var gIntervalID;
+var bestScore = 0
 
 
 
 
 function init() {
+    levelchoose()
     reasetClock()
     gGame.markedCount = 0
     gGame.avilbleHints = 3
@@ -38,7 +40,7 @@ function init() {
 }
 
 function startGame() {
-    
+
     gGame.isOn = true
     gIntervalID = setInterval(stopwatch, 1000)
 
@@ -49,43 +51,49 @@ function stopwatch() {
     var sectesxt = document.querySelector('.stoper')
 
 
-    sectesxt.innerHTML = `secondes : ${gGame.secsPassed}`
+    sectesxt.innerHTML = `⏱️ ${gGame.secsPassed}`
     gGame.secsPassed++
 }
 
 function reasetClock() {
     clearInterval(gIntervalID)
     var sectesxt = document.querySelector('.stoper')
-    sectesxt.innerHTML = `secondes : `
+    sectesxt.innerHTML = `⏱️ `
     gGame.secsPassed = 0
 
 }
 
 
 
-function levelchoose(btn) {
+function levelchoose() {
 
-    if (btn.innerText == 'Expert') {
+
+    var Easy = document.querySelector('.Easy')
+    var Medium = document.querySelector('.Medium')
+    var Expert = document.querySelector('.Expert')
+
+
+    if (Expert.checked) {
         gGame.isOn = false
         gBoardSize = 12
         mizetotal = 30
-       // gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
+        // gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
 
     }
-    if (btn.innerText == 'Medium') {
+    if (Medium.checked) {
         gGame.isOn = false
         gBoardSize = 8
         mizetotal = 12
-      //  gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
+        //  gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
     }
-    if (btn.innerText == 'Beginner') {
+    if (Easy.checked) {
         gGame.isOn = false
         gBoardSize = 4
         mizetotal = 2
-      //  gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
+        //  gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
     }
 
-    init()
+
 }
 
 
@@ -123,7 +131,7 @@ function createBoard(size) {
     for (var i = 0; i < size; i++) {
         board.push([])
         for (var j = 0; j < size; j++) {
-            var cell = { minesAroundCount: 0, isShown: false, isMine: false, isMarked: false, isHint:false }
+            var cell = { minesAroundCount: 0, isShown: false, isMine: false, isMarked: false, isHint: false }
             board[i][j] = cell
         }
     }
@@ -135,13 +143,15 @@ function renderBoard(board) {
     var strHTML = ''
 
     var mineTotal = document.querySelector('.minescount')
-    mineTotal.innerText = '💣X'+(mizetotal - gGame.markedCount)
+    mineTotal.innerText = '💣X' + (mizetotal - gGame.markedCount)
 
     var mineTotal = document.querySelector('.lives')
-    mineTotal.innerText = 'Lives: ' +gGame.lives
+    mineTotal.innerText = '❤️X' + gGame.lives
 
     var mineTotal = document.querySelector('.hintcount')
-    mineTotal.innerText = gGame.avilbleHints +'🔦'
+    mineTotal.innerText = gGame.avilbleHints + '🔦'
+
+
 
 
 
@@ -150,9 +160,9 @@ function renderBoard(board) {
         for (var j = 0; j < board[0].length; j++) {
             var cell = (board[i][j].isMine) ? MINE : board[i][j].minesAroundCount
             var className = (board[i][j].isShown) ? 'shown' : 'hidden'
-            className+= (board[i][j].isHint) ? ' hit' : ''
+            className += (board[i][j].isHint) ? ' hit' : ''
             if (board[i][j].isMarked) cell = FLAG
-            if (board[i][j].isShown && board[i][j].minesAroundCount == 0 && gGame.isOn  && !board[i][j].isMine) cell = ''
+            if (board[i][j].isShown && board[i][j].minesAroundCount == 0 && gGame.isOn && !board[i][j].isMine) cell = ''
             if (board[i][j].isMarked && board[i][j].minesAroundCount == 0 && board[i][j].isShown) cell = FLAG
 
 
@@ -178,22 +188,31 @@ function checkIfCompleted() {
 
     if (!gGame.isOn) return
 
-    if (gGame.markedCount == mizetotal && gGame.shownCount == gBoard.length * gBoard.length) {
+    if (gGame.shownCount == gBoard.length * gBoard.length) {
         var smile = document.querySelector('.smile')
         smile.innerText = ('😎')
         clearInterval(gIntervalID)
+        if (bestScore == 0 || gGame.secsPassed < bestScore) bestScore = gGame.secsPassed
+        var elBestScore = document.querySelector('h2')
+        elBestScore.innerText = 'best score: ' + (bestScore -1)
+
     }
+
+
+    //console.log('best score:',bestScore)
+    //renderBoard(gBoard)
 
 }
 
 function gameover() {
 
 
-    if(gGame.lives>1){
+    if (gGame.lives > 1) {
         gGame.lives--
         return
     }
     gGame.lives--
+    if (gGame.secsPassed < bestScore) bestScore = gGame.secsPassed
     reasetClock()
 
 
@@ -217,7 +236,7 @@ function gameover() {
 
 function cellClicked(event, cell, iIdx, jIdx) {
     if (!gGame.isOn && gGame.shownCount != 0) return
-    
+
 
 
 
@@ -248,17 +267,17 @@ function cellClicked(event, cell, iIdx, jIdx) {
 
 
     if (event.button === 0) {
-         //if(cell.innerText == '💣' || cell.innerText == '' ) game()
+        //if(cell.innerText == '💣' || cell.innerText == '' ) game()
 
-         if(gGame.isHint == true){
+        if (gGame.isHint == true) {
             cellsAroundHit(iIdx, jIdx)
 
-          setTimeout(cellsAroundNotHit,1000, iIdx, jIdx)
+            setTimeout(cellsAroundNotHit, 1000, iIdx, jIdx)
 
-          gGame.isHint = false
-          return
+            gGame.isHint = false
+            return
 
-         }
+        }
 
 
         if (!gGame.isOn) startGame()
@@ -346,18 +365,24 @@ function updateMinesAround(gBoard) {
     renderBoard(gBoard)
 }
 
-function hint(){
+function hint() {
 
-    if(gGame.avilbleHints>1){
+
+
+    if (gGame.avilbleHints > 1) {
         gGame.isHint = true
         gGame.avilbleHints--
+        var elHint = document.querySelector('.hintcount')
+        elHint.classList.add('light')
+        console.log(elHint)
 
     }
 }
 
 function cellsAroundHit(cellI, cellJ) {
 
-    console.log(gBoard[cellI][cellJ])
+    gBoard[cellI][cellJ].isHint = true
+
 
 
     for (var i = cellI - 1; i <= cellI + 1; i++) {
@@ -366,18 +391,18 @@ function cellsAroundHit(cellI, cellJ) {
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= gBoard[i].length) continue;
             gBoard[i][j].isHint = true
-            console.log(gBoard[i][j])
-            
+
         }
     }
-    //console.log(gBoard[cellI][cellJ])
     renderBoard(gBoard)
 
 
 
 }
 
-function cellsAroundNotHit(cellI, cellJ){
+function cellsAroundNotHit(cellI, cellJ) {
+    
+    gBoard[cellI][cellJ].isHint = false
 
 
     for (var i = cellI - 1; i <= cellI + 1; i++) {
@@ -386,9 +411,11 @@ function cellsAroundNotHit(cellI, cellJ){
             if (i === cellI && j === cellJ) continue;
             if (j < 0 || j >= gBoard[i].length) continue;
             gBoard[i][j].isHint = false
-            
+
         }
     }
+    var elHint = document.querySelector('.hintcount')
+        elHint.classList.remove('light')
 
     renderBoard(gBoard)
 

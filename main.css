@@ -1,3 +1,8 @@
+body{
+  background-color: rgb(248, 239, 239);
+}
+
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -13,15 +18,57 @@
   body{ 
   text-align: center;
   }
+
+  label{
+    margin: 20px;
+    font-size: 20px;
+    cursor: pointer;
+
+  }
+
+  .head{
+    margin: 10px;
+  }
+
+
+  label:hover{
+    color: #0E75FF;
+  }
+
+  .btn {
+    background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  }
+
+  
+  
+  .but:hover {
+    background-color: blue;
+    color: white;
+  }
   .hidden {
     
-    border: 5px black solid;
+    border: 2px black solid;
     /* //display: none; */
-    background-color: #e71f1f;
+    background-color: rgb(240, 13, 13);
     /* color: #e71f1f; */
     font-size: 0;
 
   }
+
+  .hidden:hover{
+    opacity: 70%;
+  }
+
+  
 
   .hit{
     opacity: 50%;
@@ -29,9 +76,11 @@
   }
 
   td{
+    cursor: pointer;
     height: 50px;
     width: 50px;
     font-size: 30px;
+    border-radius: 10px;
   }
 
 
@@ -42,26 +91,28 @@
   }
 
   .pressed{
-    background-color: blue
-
+    background-color: blue;
   }
-
+  
   .notpressed{
     background-color: rgb(126, 126, 141)
   }
-
+  
   .shown {
-    background-color: #1f2ac2;
+    pointer-events: none;
+    background-color: #4b56f0;
     opacity: 100%;
-    border: 5px black solid;
+    border: 2px black solid;
     font-size: 20px;
 
   }
 
   .minescount{
-    background-color: #e71f1f;
+    /* background-color: #e71f1f; */
     display: inline-block;
     width: 50px;
+    font-size: 20px;
+    
   }
 
   .light{
@@ -76,11 +127,12 @@
   .lives{
     display: inline-block;
     width: 50px;
-    font-size: 12px;
+    font-size: 20px;
 
   }
 
   .smile{
+    cursor: pointer;
     /* display: inline-block; */
     margin: 0 auto;
     width: 50px;
@@ -105,9 +157,11 @@
     font-weight: bold;
   }
   
-  .close:hover,
+  
   .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
   }
+
+  
