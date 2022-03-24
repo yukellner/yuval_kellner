@@ -1,0 +1,113 @@
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  body{ 
+  text-align: center;
+  }
+  .hidden {
+    
+    border: 5px black solid;
+    /* //display: none; */
+    background-color: #e71f1f;
+    /* color: #e71f1f; */
+    font-size: 0;
+
+  }
+
+  .hit{
+    opacity: 50%;
+    font-size: 30px;
+  }
+
+  td{
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+  }
+
+
+
+  table{
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .pressed{
+    background-color: blue
+
+  }
+
+  .notpressed{
+    background-color: rgb(126, 126, 141)
+  }
+
+  .shown {
+    background-color: #1f2ac2;
+    opacity: 100%;
+    border: 5px black solid;
+    font-size: 20px;
+
+  }
+
+  .minescount{
+    background-color: #e71f1f;
+    display: inline-block;
+    width: 50px;
+  }
+
+  .light{
+    background-color: yellowgreen;
+  }
+
+  .stoper{
+    display: inline-block;
+    width: 50px;
+  }
+
+  .lives{
+    display: inline-block;
+    width: 50px;
+    font-size: 12px;
+
+  }
+
+  .smile{
+    /* display: inline-block; */
+    margin: 0 auto;
+    width: 50px;
+    font-size: 50px;
+  }
+
+
+
+  .modal-content {
+    background-color: #e71f1f;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }

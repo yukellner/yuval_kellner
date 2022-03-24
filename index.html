@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>Document</title>
+</head>
+
+<body onload="init()">
+    <div>
+        <div onclick="init()" class="smile">😃</div>
+        <button class="hintcount" onclick="hint()">hint🔦</button>
+        <div class="lives"></div>
+        <div class="minescount"></div>
+        <div class="stoper"></div>
+    </div>
+    <button onclick="levelchoose(this)" class="pressed">Beginner</button>
+    <button onclick="levelchoose(this)" class="notpressed">Medium</button>
+    <button onclick="levelchoose(this)" class="notpressed">Expert</button>
+    <table class="table">
+
+    </table>
+
+
+
+    <script src="utilis.js"></script>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
