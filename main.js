@@ -7,7 +7,7 @@ var gMines = []
 var gBoardSize = 4
 var mizetotal = 2
 var markedMinses = 0
-var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, lives: 3, isHint: false, avilbleHints: 3 }
+var gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0, lives: 3, isHint: false, avilbleHints: 3, safeBtn:3 }
 var gIntervalID;
 var bestScore = 0
 
@@ -19,6 +19,7 @@ function init() {
     reasetClock()
     gGame.markedCount = 0
     gGame.avilbleHints = 3
+    gGame.safeBtn = 3
     gGame.shownCount = 0
     var header = document.querySelector('.smile')
     header.innerText = '😃'
@@ -148,6 +149,9 @@ function renderBoard(board) {
     var mineTotal = document.querySelector('.hintcount')
     mineTotal.innerText = gGame.avilbleHints + '🔦'
 
+    var mineTotal = document.querySelector('.safebtn')
+    mineTotal.innerText = '⛑️X'+gGame.safeBtn
+
 
 
 
@@ -191,7 +195,7 @@ function checkIfCompleted() {
         clearInterval(gIntervalID)
         if (bestScore == 0 || gGame.secsPassed < bestScore) bestScore = gGame.secsPassed
         var elBestScore = document.querySelector('h2')
-        elBestScore.innerText = 'best score: ' + (bestScore - 1)
+        elBestScore.innerText = 'best score: ' + (bestScore - 1)+' sec'
 
     }
 
@@ -203,6 +207,7 @@ function gameover() {
 
     if (gGame.lives > 1) {
         gGame.lives--
+        gGame.markedCount++
         return
     }
     gGame.lives--
@@ -419,14 +424,39 @@ function cellsAroundNotHit(cellI, cellJ) {
 
 function safeBtn() {
     var safePlace = getCellNoMine()
+
+    gBoard[safePlace.i][safePlace.j].isHint = true
+
+    setTimeout(function(){
+        gBoard[safePlace.i][safePlace.j].isHint = false
+        renderBoard(gBoard)
+
+    },2000)
+
+    renderBoard(gBoard)
 }
 
 function getCellNoMine() {
+
+    if(gGame.safeBtn >0){
+        gGame.safeBtn--
+
+    
+    var arr = []
     for (var i = 0; i < gBoard.length; i++) {
         for (var j = 0; j < gBoard[0].length; j++) {
             if (!gBoard[i][j].isMine && !gBoard[i][j].isShown) {
-
+                
+                arr.push({i:i, j:j})
+                
+                
+                
             }
         }
     }
+    var num = getRandomInt(0,arr.length-1)
+    
+    console.log(num)
+    return arr[num]
+}
 }
