@@ -2,19 +2,15 @@ body{
   background-color: rgb(248, 239, 239);
 }
 
+.header {
+  text-align: center;
+  background: #4b56f0;
+  color: rgb(228, 225, 225);
+  border-radius: 5px;
+}
 
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+
+
   body{ 
   text-align: center;
   }
@@ -76,6 +72,7 @@ body{
   }
 
   td{
+    z-index: 100;
     cursor: pointer;
     height: 50px;
     width: 50px;
@@ -99,11 +96,21 @@ body{
   }
   
   .shown {
-    pointer-events: none;
+    z-index: 100;
+    /* pointer-events: none; */
     background-color: #4b56f0;
-    opacity: 100%;
+    /* opacity: 100%; */
     border: 2px black solid;
     font-size: 20px;
+
+  }
+  .hidden {
+    
+    border: 2px black solid;
+    /* //display: none; */
+    background-color: rgb(240, 13, 13);
+    /* color: #e71f1f; */
+    font-size: 0;
 
   }
 
@@ -141,27 +148,6 @@ body{
 
 
 
-  .modal-content {
-    background-color: #e71f1f;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-  }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+ 
 
   

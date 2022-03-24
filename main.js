@@ -77,20 +77,17 @@ function levelchoose() {
         gGame.isOn = false
         gBoardSize = 12
         mizetotal = 30
-        // gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
 
     }
     if (Medium.checked) {
         gGame.isOn = false
         gBoardSize = 8
         mizetotal = 12
-        //  gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
     }
     if (Easy.checked) {
         gGame.isOn = false
         gBoardSize = 4
         mizetotal = 2
-        //  gGame = { isOn: false, shownCount: 0, markedCount: 0, secsPassed: 0 }
     }
 
 
@@ -194,13 +191,10 @@ function checkIfCompleted() {
         clearInterval(gIntervalID)
         if (bestScore == 0 || gGame.secsPassed < bestScore) bestScore = gGame.secsPassed
         var elBestScore = document.querySelector('h2')
-        elBestScore.innerText = 'best score: ' + (bestScore -1)
+        elBestScore.innerText = 'best score: ' + (bestScore - 1)
 
     }
 
-
-    //console.log('best score:',bestScore)
-    //renderBoard(gBoard)
 
 }
 
@@ -235,6 +229,7 @@ function gameover() {
 }
 
 function cellClicked(event, cell, iIdx, jIdx) {
+    console.log('here')
     if (!gGame.isOn && gGame.shownCount != 0) return
 
 
@@ -248,6 +243,7 @@ function cellClicked(event, cell, iIdx, jIdx) {
     event.preventDefault()
 
     if (event.button === 2 && gBoard[iIdx][jIdx].isShown == false) {
+
         if (!gGame.isOn) startGame()
         if (gBoard[iIdx][jIdx].isMarked != true) {
             gBoard[iIdx][jIdx].isMarked = true
@@ -267,6 +263,7 @@ function cellClicked(event, cell, iIdx, jIdx) {
 
 
     if (event.button === 0) {
+
         //if(cell.innerText == '💣' || cell.innerText == '' ) game()
 
         if (gGame.isHint == true) {
@@ -285,13 +282,11 @@ function cellClicked(event, cell, iIdx, jIdx) {
 
         if (!gBoard[iIdx][jIdx].isShown) gGame.shownCount++
         if (gBoard[iIdx][jIdx].isShown && gBoard[iIdx][jIdx].isMarked) gGame.markedCount--
-
-
         gBoard[iIdx][jIdx].isShown = true
         if (gBoard[iIdx][jIdx].isMarked && gBoard[iIdx][jIdx].minesAroundCount == 0) cellsAroundVisible(iIdx, jIdx)
         if (gBoard[iIdx][jIdx].isMine) gameover()
         if (cell.innerText === '0') cellsAroundVisible(iIdx, jIdx)
-        if (gBoard[iIdx][jIdx].isMarked = true) gBoard[iIdx][jIdx].isMarked = false
+        if (gBoard[iIdx][jIdx].isMarked) gBoard[iIdx][jIdx].isMarked = false
     }
 
 
@@ -374,7 +369,6 @@ function hint() {
         gGame.avilbleHints--
         var elHint = document.querySelector('.hintcount')
         elHint.classList.add('light')
-        console.log(elHint)
 
     }
 }
@@ -401,7 +395,7 @@ function cellsAroundHit(cellI, cellJ) {
 }
 
 function cellsAroundNotHit(cellI, cellJ) {
-    
+
     gBoard[cellI][cellJ].isHint = false
 
 
@@ -415,10 +409,24 @@ function cellsAroundNotHit(cellI, cellJ) {
         }
     }
     var elHint = document.querySelector('.hintcount')
-        elHint.classList.remove('light')
+    elHint.classList.remove('light')
 
     renderBoard(gBoard)
 
 
 
+}
+
+function safeBtn() {
+    var safePlace = getCellNoMine()
+}
+
+function getCellNoMine() {
+    for (var i = 0; i < gBoard.length; i++) {
+        for (var j = 0; j < gBoard[0].length; j++) {
+            if (!gBoard[i][j].isMine && !gBoard[i][j].isShown) {
+
+            }
+        }
+    }
 }
