@@ -50,15 +50,7 @@ body{
     background-color: blue;
     color: white;
   }
-  .hidden {
-    
-    border: 2px black solid;
-    /* //display: none; */
-    background-color: rgb(240, 13, 13);
-    /* color: #e71f1f; */
-    font-size: 0;
-
-  }
+  
 
   .hidden:hover{
     opacity: 70%;
@@ -68,7 +60,7 @@ body{
 
   .hit{
     opacity: 50%;
-    font-size: 30px;
+    font-size: 30px !important;
   }
 
   td{
@@ -76,7 +68,7 @@ body{
     cursor: pointer;
     height: 50px;
     width: 50px;
-    font-size: 30px;
+    /* font-size: 30px; */
     border-radius: 10px;
   }
 
