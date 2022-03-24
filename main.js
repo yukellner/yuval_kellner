@@ -234,34 +234,54 @@ function gameover() {
 }
 
 function cellClicked(event, cell, iIdx, jIdx) {
-    console.log('here')
     if (!gGame.isOn && gGame.shownCount != 0) return
-
-
-
-
-
+    
+    
+    
+    
+    
     window.addEventListener('contextmenu', (event) => {
         event.preventDefault()
-
+        
     })
     event.preventDefault()
-
+    
     if (event.button === 2 && gBoard[iIdx][jIdx].isShown == false) {
-
+        
         if (!gGame.isOn) startGame()
         if (gBoard[iIdx][jIdx].isMarked != true) {
             gBoard[iIdx][jIdx].isMarked = true
             gGame.markedCount++
         }
-
-
-
+        
+        
+        
+        
         gGame.shownCount++
-
+        
+        
+        
         gBoard[iIdx][jIdx].isShown = true
-
+        renderBoard(gBoard)
+        return
+        
     }
+    
+    if (event.button === 2 && gBoard[iIdx][jIdx].isShown == true && gBoard[iIdx][jIdx].isMarked){
+        gBoard[iIdx][jIdx].isMarked = false
+        gBoard[iIdx][jIdx].isShown = false
+        console.log('gGame.shownCount',gGame.shownCount)
+        gGame.shownCount--
+        gGame.markedCount--
+        console.log('gGame.shownCount',gGame.shownCount)
+        renderBoard(gBoard)
+
+
+
+        
+    }
+
+    
 
 
 
@@ -456,7 +476,6 @@ function getCellNoMine() {
     }
     var num = getRandomInt(0,arr.length-1)
     
-    console.log(num)
     return arr[num]
 }
 }
