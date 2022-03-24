@@ -189,7 +189,7 @@ function checkIfCompleted() {
 
     if (!gGame.isOn) return
 
-    if (gGame.shownCount == gBoard.length * gBoard.length) {
+    if (gGame.shownCount == gBoard.length * gBoard.length && gGame.markedCount==mizetotal) {
         var smile = document.querySelector('.smile')
         smile.innerText = ('😎')
         clearInterval(gIntervalID)
